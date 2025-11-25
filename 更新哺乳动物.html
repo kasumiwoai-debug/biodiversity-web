@@ -1,0 +1,593 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生多课堂：动物侦探大冒险</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: "Microsoft YaHei", "SimHei", sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+        
+        .slide-section { 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            padding: 3rem 2rem; 
+            position: relative; 
+            border-bottom: 12px solid #FCD34D; 
+            overflow: hidden;
+        }
+
+        .image-box { 
+            background-color: #F8FAFC;
+            border: 6px solid #94A3B8;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .image-box:hover { transform: scale(1.02); z-index: 10; }
+        
+        .slide-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .detective-tip {
+            background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+            border: 4px solid #F59E0B;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            font-size: 1.25rem;
+            color: #92400E;
+            font-weight: bold;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .detective-tip::before {
+            content: '💡';
+            position: absolute;
+            top: -1.5rem;
+            left: 1.5rem;
+            font-size: 3rem;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+        }
+
+        .bg-grid-pattern {
+            background-image: radial-gradient(#CBD5E1 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+        
+        .float-anim { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- 侧边导航球 -->
+    <div class="fixed right-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-50">
+        <a href="#cover" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 hover:scale-150 transition shadow-lg" title="封面"></a>
+        <a href="#page1" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 transition shadow-lg" title="1"></a>
+        <a href="#page2" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 transition shadow-lg" title="2"></a>
+        <a href="#page3" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 transition shadow-lg" title="3"></a>
+        <a href="#page4" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 transition shadow-lg" title="4"></a>
+        <a href="#page5" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 transition shadow-lg" title="5"></a>
+        <a href="#page6" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 transition shadow-lg" title="6"></a>
+        <a href="#page7" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 transition shadow-lg" title="7"></a>
+        <a href="#page8" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 transition shadow-lg" title="8"></a>
+        <a href="#page9" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 transition shadow-lg" title="9"></a>
+        <a href="#page10" class="w-4 h-4 rounded-full bg-slate-300 hover:bg-orange-500 transition shadow-lg" title="10"></a>
+    </div>
+
+    <!-- ======================= 封面 ======================= -->
+    <section id="cover" class="slide-section bg-gradient-to-br from-green-400 to-blue-500 text-center text-white relative">
+        <div class="absolute inset-0 opacity-20 bg-grid-pattern"></div>
+        <div class="absolute top-10 left-10 float-anim"><i data-lucide="cloud" size="120" class="text-white/40"></i></div>
+        <div class="absolute bottom-20 right-10 float-anim" style="animation-delay: 2s"><i data-lucide="trees" size="150" class="text-green-800/20"></i></div>
+
+        <div class="max-w-6xl mx-auto z-10 flex flex-col items-center justify-center h-full">
+            <div class="bg-yellow-400 text-yellow-900 px-10 py-3 rounded-full font-black text-2xl shadow-[0_10px_0_rgb(180,83,9)] transform -rotate-2 mb-8 border-4 border-yellow-100">
+                生多课堂 · 互动课件
+            </div>
+            
+            <h1 class="text-7xl md:text-9xl font-black tracking-tight drop-shadow-lg mb-6 leading-tight">
+                磐安森林<br>探秘大冒险
+            </h1>
+            
+            <div class="w-full max-w-3xl h-64 rounded-3xl overflow-hidden border-4 border-white/40 shadow-2xl relative mb-12 group">
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Panan_County_Zhejiang.jpg/640px-Panan_County_Zhejiang.jpg" alt="磐安风景" class="w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+                 <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                     <span class="text-2xl font-bold text-white tracking-widest">目标地点：浙江磐安</span>
+                 </div>
+            </div>
+
+            <a href="#page1" class="bg-yellow-400 hover:bg-yellow-300 text-yellow-900 text-3xl font-black px-16 py-6 rounded-full shadow-[0_10px_0_rgb(180,83,9)] transition transform hover:translate-y-1 active:translate-y-2 active:shadow-none animate-bounce">
+                开始探险 GO!
+            </a>
+        </div>
+    </section>
+
+    <!-- ======================= Page 1: 疑问 ======================= -->
+    <section id="page1" class="slide-section bg-sky-50 bg-grid-pattern">
+        <div class="max-w-7xl mx-auto w-full h-full flex flex-col justify-center">
+            
+            <div class="grid md:grid-cols-2 gap-12 items-stretch h-full">
+                <!-- 左侧图片区：4张高清动物拼图 -->
+                <div class="relative bg-white p-4 rounded-[3rem] shadow-2xl rotate-2 border-4 border-sky-200">
+                    <div class="absolute -top-6 -left-6 bg-yellow-400 text-yellow-900 w-20 h-20 rounded-full flex items-center justify-center font-black text-3xl border-4 border-white shadow-lg z-10">?</div>
+                    
+                    <div class="h-full image-box min-h-[400px] bg-white p-2 grid grid-cols-2 gap-2">
+                        <!-- 1. 金丝猴 (保持网络图，或替换为 image_1d22d7.jpg) -->
+                        <div class="overflow-hidden rounded-2xl relative group">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Golden_Snub-nosed_Monkeys%2C_Qinling_Mountains_-_China.jpg/640px-Golden_Snub-nosed_Monkeys%2C_Qinling_Mountains_-_China.jpg" alt="金丝猴" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/50 to-transparent p-2 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition">金丝猴</div>
+                        </div>
+                        
+                        <!-- 2. 藏羚羊 (已替换为您提供的 image_0fd931.jpg) -->
+                        <div class="overflow-hidden rounded-2xl relative group">
+                            <img src="image_0fd931.jpg" alt="羚羊" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/50 to-transparent p-2 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition">藏羚羊</div>
+                        </div>
+                        
+                        <!-- 3. 白海豚 (已替换为您提供的 image_0fd935.jpg) -->
+                        <div class="overflow-hidden rounded-2xl relative group">
+                            <img src="image_0fd935.jpg" alt="海豚" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/50 to-transparent p-2 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition">海豚</div>
+                        </div>
+                        
+                        <!-- 4. 亚洲象 (保持网络图，或替换为 image_1d22b5.jpg) -->
+                        <div class="overflow-hidden rounded-2xl relative group">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Elephas_maximus_%28Bandipur%29.jpg/640px-Elephas_maximus_%28Bandipur%29.jpg" alt="大象" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/50 to-transparent p-2 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition">亚洲象</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧文字区 -->
+                <div class="flex flex-col justify-center space-y-8">
+                    <h2 class="text-6xl font-black text-sky-900 leading-tight">
+                        它们为什么<br>是<span class="text-sky-500">一家人</span>？
+                    </h2>
+                    
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border-l-8 border-sky-500">
+                        <p class="text-2xl text-slate-700 leading-relaxed font-bold">
+                            看左边的照片！🐬 🐼 🐒<br>
+                            大家长得完全不一样，<br>
+                            为什么科学家说它们都是<span class="bg-yellow-200 px-2 rounded">“哺乳动物”</span>？
+                        </p>
+                    </div>
+
+                    <div class="detective-tip mt-auto">
+                        小侦探想一想：<br>
+                        大熊猫和海豚有什么一样的地方？<br>
+                        <span class="text-base font-normal text-amber-800 opacity-80">(提示：它们是怎么生宝宝的？)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Page 2: 定义 ======================= -->
+    <section id="page2" class="slide-section bg-blue-50 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-100/50 -skew-x-12 transform translate-x-20"></div>
+
+        <div class="max-w-7xl mx-auto w-full z-10 flex flex-col h-full">
+            <h2 class="text-5xl font-black text-center text-blue-900 mb-10 bg-white inline-block mx-auto px-10 py-4 rounded-full shadow-md border-4 border-blue-200">
+                <i data-lucide="clipboard-check" class="inline mr-4"></i>哺乳动物鉴定指南
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 flex-1">
+                <!-- 三大特征卡片 -->
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-blue-500 flex flex-col items-center justify-center group hover:-translate-y-2 transition">
+                    <div class="bg-blue-100 w-24 h-24 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="thermometer" class="text-blue-600" size="48"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-slate-800 mb-4">体温恒定</h3>
+                    <p class="text-xl text-slate-600 text-center font-bold">自带“暖宝宝”</p>
+                </div>
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-pink-500 flex flex-col items-center justify-center group hover:-translate-y-2 transition">
+                    <div class="bg-pink-100 w-24 h-24 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="baby" class="text-pink-600" size="48"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-slate-800 mb-4">胎生哺乳</h3>
+                    <p class="text-xl text-slate-600 text-center font-bold">喝妈妈的奶长大</p>
+                </div>
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-purple-500 flex flex-col items-center justify-center group hover:-translate-y-2 transition">
+                    <div class="bg-purple-100 w-24 h-24 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="text-purple-600" size="48"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-slate-800 mb-4">超强大脑</h3>
+                    <p class="text-xl text-slate-600 text-center font-bold">聪明灵活</p>
+                </div>
+            </div>
+
+            <!-- 底部补充图片：熊猫吃竹子 -->
+            <div class="mt-10 bg-white p-4 rounded-3xl shadow-lg border-2 border-dashed border-blue-300">
+                <div class="h-48 image-box">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1280px-Grosser_Panda.JPG" alt="熊猫吃竹子" class="slide-img" style="object-position: center;">
+                </div>
+                <div class="text-center mt-4">
+                    <span class="bg-yellow-400 text-yellow-900 px-6 py-2 rounded-full font-bold text-lg animate-pulse">
+                        摸摸你的手臂，是不是热乎乎的？你也是哺乳动物哦！
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Page 3: 装备A ======================= -->
+    <section id="page3" class="slide-section bg-slate-900 text-white bg-grid-pattern relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 to-slate-800 opacity-90"></div>
+        
+        <div class="max-w-7xl mx-auto w-full z-10 grid md:grid-cols-2 gap-16 items-center">
+            <div class="space-y-10">
+                <div class="inline-block bg-green-500 text-black font-black text-xl px-6 py-2 rounded-lg transform -rotate-2">
+                    侦探道具 NO.1
+                </div>
+                <h2 class="text-6xl font-black leading-tight">
+                    森林里的<br><span class="text-green-400">“隐形眼”</span>
+                </h2>
+                
+                <div class="bg-slate-800/50 p-8 rounded-3xl border border-slate-600 backdrop-blur-md">
+                    <h3 class="text-3xl text-green-400 font-bold mb-6 flex items-center">
+                        <i data-lucide="camera" class="mr-4" size="32"></i> 红外线相机
+                    </h3>
+                    <ul class="space-y-6 text-2xl text-slate-200 font-medium">
+                        <li class="flex items-center"><i data-lucide="check-circle" class="mr-4 text-green-500 shrink-0"></i> 24小时不睡觉</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="mr-4 text-green-500 shrink-0"></i> 绑在树干上偷拍</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="mr-4 text-green-500 shrink-0"></i> 动物路过就“咔嚓”</li>
+                    </ul>
+                </div>
+
+                <div class="detective-tip bg-slate-800 border-green-500 text-green-200 text-xl">
+                    为什么不用人去拍？<br>
+                    <span class="text-lg opacity-80">因为动物太害羞啦，闻到人的气味就会躲起来！</span>
+                </div>
+            </div>
+            
+            <!-- 红外相机工作图 -->
+            <div class="h-full min-h-[500px] image-box border-8 border-slate-700 group">
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Camera_trap_in_Khao_Yai_National_Park.jpg/640px-Camera_trap_in_Khao_Yai_National_Park.jpg" alt="红外相机" class="slide-img">
+                 <div class="absolute bottom-4 left-0 w-full text-center">
+                     <span class="bg-black/50 text-white px-4 py-1 rounded-full text-sm">正在监测中...</span>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Page 4: 装备B ======================= -->
+    <section id="page4" class="slide-section bg-yellow-50 bg-grid-pattern">
+        <div class="max-w-7xl mx-auto w-full flex flex-col h-full">
+            <div class="text-center mb-10">
+                <div class="inline-block bg-orange-500 text-white font-black text-xl px-6 py-2 rounded-lg mb-4 shadow-lg">
+                    侦探道具 NO.2
+                </div>
+                <h2 class="text-6xl font-black text-yellow-900">样线调查法</h2>
+                <p class="text-2xl text-yellow-700 mt-4 font-bold">也就是……走路去破案！👣</p>
+            </div>
+
+            <div class="flex-1 bg-white rounded-[3rem] shadow-2xl border-8 border-yellow-200 p-10 grid md:grid-cols-2 gap-12 items-center">
+                
+                <div class="space-y-8">
+                    <div class="flex items-center gap-6 bg-yellow-50 p-6 rounded-2xl border border-yellow-100">
+                        <div class="bg-yellow-400 w-16 h-16 rounded-full flex items-center justify-center shrink-0 shadow-md text-2xl font-black text-white">1</div>
+                        <div>
+                            <h4 class="font-black text-2xl text-slate-800">1. 选路线</h4>
+                            <p class="text-lg text-slate-500 font-bold">找动物喜欢走的小路</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6 bg-yellow-50 p-6 rounded-2xl border border-yellow-100">
+                        <div class="bg-yellow-400 w-16 h-16 rounded-full flex items-center justify-center shrink-0 shadow-md text-2xl font-black text-white">2</div>
+                        <div>
+                            <h4 class="font-black text-2xl text-slate-800">2. 慢慢走</h4>
+                            <p class="text-lg text-slate-500 font-bold">速度 2-3 km/h (像散步一样)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6 bg-yellow-50 p-6 rounded-2xl border border-yellow-100">
+                        <div class="bg-yellow-400 w-16 h-16 rounded-full flex items-center justify-center shrink-0 shadow-md text-2xl font-black text-white">3</div>
+                        <div>
+                            <h4 class="font-black text-2xl text-slate-800">3. 找线索</h4>
+                            <p class="text-lg text-slate-500 font-bold">脚印、便便、洞穴、叫声</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 足迹识别图 -->
+                <div class="h-full min-h-[400px] image-box border-4 border-slate-200 bg-white">
+                     <img src="https://mdc.mo.gov/sites/default/files/styles/gallery_main_image/public/2021-01/track_patterns.jpg?itok=V_s8Q_9Z" alt="足迹识别" class="slide-img" style="object-fit: contain;">
+                     <div class="absolute bottom-4 right-4 bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full font-bold shadow-lg">
+                        看看这些是谁的脚印？
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Page 5: 基地概况 ======================= -->
+    <section id="page5" class="slide-section bg-green-50 bg-grid-pattern">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="text-center mb-12">
+                <span class="bg-green-600 text-white px-6 py-2 rounded-full text-xl font-bold tracking-widest uppercase">Base Station</span>
+                <h2 class="text-6xl font-black text-green-800 mt-4">欢迎来到“磐安基地”</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-stretch">
+                <!-- 风景图 -->
+                <div class="min-h-[400px] bg-white p-4 rounded-[2rem] shadow-xl rotate-1">
+                    <div class="h-full image-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Panan_County_Zhejiang.jpg/640px-Panan_County_Zhejiang.jpg" alt="磐安风景" class="slide-img">
+                    </div>
+                </div>
+                
+                <div class="flex flex-col gap-6 justify-center">
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border-l-[12px] border-green-500 flex items-center justify-between">
+                        <div>
+                            <div class="text-7xl font-black text-green-600">60</div>
+                            <div class="text-xl font-bold text-slate-500 uppercase tracking-widest">种哺乳动物</div>
+                        </div>
+                        <i data-lucide="cat" size="64" class="text-green-200"></i>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border-l-[12px] border-blue-500 flex items-center justify-between">
+                        <div>
+                            <div class="text-7xl font-black text-blue-600">13</div>
+                            <div class="text-xl font-bold text-slate-500 uppercase tracking-widest">种重点保护</div>
+                        </div>
+                        <i data-lucide="shield" size="64" class="text-blue-200"></i>
+                    </div>
+
+                    <div class="bg-orange-100 p-8 rounded-3xl shadow-lg border-4 border-orange-300 relative overflow-hidden">
+                        <div class="relative z-10">
+                            <div class="text-3xl font-black text-orange-800 mb-2">这里的“老大”是谁？</div>
+                            <div class="text-5xl font-black text-orange-600">小麂 (jǐ)</div>
+                            <div class="text-lg font-bold text-orange-800 mt-2">中国特有种 · 数量最多</div>
+                        </div>
+                        <i data-lucide="crown" size="120" class="text-orange-200 absolute -bottom-4 -right-4 rotate-12"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Page 6: 保护名录 ======================= -->
+    <section id="page6" class="slide-section bg-red-50 bg-grid-pattern">
+        <div class="max-w-6xl mx-auto w-full h-full flex flex-col">
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center bg-red-100 text-red-800 px-8 py-3 rounded-full font-black text-2xl border-2 border-red-200 shadow-sm">
+                    <i data-lucide="file-warning" class="mr-3" size="32"></i> 绝密档案：重点保护对象
+                </div>
+            </div>
+
+            <div class="flex-1 grid gap-8">
+                <!-- 一级保护 -->
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-xl flex flex-col md:flex-row gap-10 items-center border-l-[16px] border-red-500">
+                    <div class="text-center shrink-0 z-10">
+                        <span class="text-8xl font-black text-red-500 block leading-none">1</span>
+                        <div class="text-2xl font-bold text-red-800 mt-2">一级保护 (4种)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 z-10 justify-center md:justify-start flex-1">
+                        <span class="px-6 py-3 bg-red-100 rounded-xl font-black text-2xl text-red-900 shadow-sm hover:scale-105 transition">中华穿山甲</span>
+                        <span class="px-6 py-3 bg-red-100 rounded-xl font-black text-2xl text-red-900 shadow-sm hover:scale-105 transition">黑麂</span>
+                        <span class="px-6 py-3 bg-red-100 rounded-xl font-black text-2xl text-red-900 shadow-sm hover:scale-105 transition">小灵猫</span>
+                        <span class="px-6 py-3 bg-red-100 rounded-xl font-black text-2xl text-red-900 shadow-sm hover:scale-105 transition">大灵猫</span>
+                    </div>
+                </div>
+
+                <!-- 二级保护 -->
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-xl flex flex-col md:flex-row gap-10 items-center border-l-[16px] border-orange-400">
+                    <div class="text-center shrink-0 z-10">
+                        <span class="text-8xl font-black text-orange-400 block leading-none">2</span>
+                        <div class="text-2xl font-bold text-orange-700 mt-2">二级保护 (9种)</div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 z-10 justify-center md:justify-start flex-1">
+                        <span class="px-6 py-3 bg-orange-100 rounded-xl font-black text-2xl text-orange-900 shadow-sm hover:scale-105 transition">豹猫</span>
+                        <span class="px-6 py-3 bg-orange-100 rounded-xl font-black text-2xl text-orange-900 shadow-sm hover:scale-105 transition">毛冠鹿</span>
+                        <span class="px-6 py-3 bg-orange-100 rounded-xl font-black text-2xl text-orange-900 shadow-sm hover:scale-105 transition">中华鬣羚</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 动物照片横条 -->
+            <div class="mt-8 h-40 image-box border-4 border-slate-300 bg-white p-2 grid grid-cols-3 gap-2">
+                <div class="relative group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Viverricula_indica.jpg/640px-Viverricula_indica.jpg" alt="小灵猫" class="w-full h-full object-cover rounded-xl">
+                    <span class="absolute bottom-1 left-1 bg-black/50 text-white text-xs px-2 rounded">小灵猫</span>
+                </div>
+                <div class="relative group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Muntiacus_crinifrons.jpg/640px-Muntiacus_crinifrons.jpg" alt="黑麂" class="w-full h-full object-cover rounded-xl">
+                    <span class="absolute bottom-1 left-1 bg-black/50 text-white text-xs px-2 rounded">黑麂</span>
+                </div>
+                <div class="relative group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Manis_pentadactyla_dalmanni.jpg/640px-Manis_pentadactyla_dalmanni.jpg" alt="中华穿山甲" class="w-full h-full object-cover rounded-xl">
+                    <span class="absolute bottom-1 left-1 bg-black/50 text-white text-xs px-2 rounded">中华穿山甲</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Page 7: 穿山甲1 ======================= -->
+    <section id="page7" class="slide-section bg-amber-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-16 items-center z-10">
+            <div>
+                <div class="bg-red-500 text-white px-4 py-2 text-xl font-black rounded-lg inline-block mb-6 shadow-lg rotate-2">
+                    明星档案 NO.1
+                </div>
+                <h2 class="text-7xl font-black text-amber-900 mb-6 drop-shadow-sm">中华<br>穿山甲</h2>
+                
+                <div class="bg-white/60 p-6 rounded-2xl backdrop-blur-sm border-2 border-amber-200 mb-8">
+                    <div class="text-2xl font-black text-amber-700 bg-amber-100 inline-block px-6 py-2 rounded-full mb-4">
+                        5000万岁的老住户
+                    </div>
+                    <p class="text-xl text-slate-700 font-bold leading-relaxed">
+                        在恐龙刚灭绝不久，它们的祖先就出现了！<br>
+                        它是真正的<span class="text-red-500">“活化石”</span>。
+                    </p>
+                </div>
+
+                <div class="space-y-4 text-xl text-slate-700 font-medium">
+                    <p class="flex items-center bg-white p-4 rounded-xl shadow-sm"><span class="text-3xl mr-4">🍉</span> 体重 3-5kg (像个大西瓜)</p>
+                    <p class="flex items-center bg-white p-4 rounded-xl shadow-sm"><span class="text-3xl mr-4">🛡️</span> 披着“叠叠乐”一样的鳞片铠甲</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col gap-6 h-full">
+                <!-- 进化图 -->
+                <div class="flex-1 bg-white p-4 rounded-[2rem] shadow-xl border-4 border-amber-200 relative">
+                    <div class="h-full image-box min-h-[300px]">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Manis_pentadactyla.jpg/640px-Manis_pentadactyla.jpg" alt="穿山甲绘图" class="slide-img" style="object-fit: contain;">
+                    </div>
+                    <span class="absolute top-6 left-6 bg-amber-100 text-amber-800 px-3 py-1 rounded-lg font-bold text-sm shadow">手绘图谱</span>
+                </div>
+                <!-- 实体图 -->
+                <div class="h-48 image-box shadow-inner relative">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Manis_pentadactyla_in_Taipei_Zoo_20140523.jpg/640px-Manis_pentadactyla_in_Taipei_Zoo_20140523.jpg" alt="穿山甲实拍" class="slide-img" style="object-position: center;">
+                    <span class="absolute bottom-2 right-2 bg-black/50 text-white px-3 py-1 rounded-lg text-xs">实拍照片</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Page 8: 穿山甲2 ======================= -->
+    <section id="page8" class="slide-section bg-amber-100 bg-grid-pattern">
+        <div class="max-w-7xl mx-auto w-full flex flex-col h-full justify-center">
+            <h2 class="text-6xl font-black text-amber-900 text-center mb-12">
+                穿山甲的<span class="text-red-500 bg-white px-4 rounded-lg transform -rotate-2 inline-block shadow-md">超能力</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                <!-- 技能1 -->
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-amber-600 group hover:-translate-y-2 transition">
+                    <div class="h-48 image-box mb-6 rounded-xl">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Pangolin_digging.jpg/640px-Pangolin_digging.jpg" alt="挖洞" class="slide-img">
+                    </div>
+                    <h3 class="font-black text-2xl text-center mb-4 text-slate-800">超级挖掘机</h3>
+                    <p class="text-lg text-slate-600 font-bold text-center">爪子超锋利<br>挖洞速度第一名</p>
+                </div>
+                <!-- 技能2 -->
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-blue-500 group hover:-translate-y-2 transition">
+                    <div class="h-48 image-box mb-6 rounded-xl">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Phataginus_tricuspis.jpg/640px-Phataginus_tricuspis.jpg" alt="爬树" class="slide-img">
+                    </div>
+                    <h3 class="font-black text-2xl text-center mb-4 text-slate-800">全能运动王</h3>
+                    <p class="text-lg text-slate-600 font-bold text-center">会游泳，会爬树<br>无所不能！</p>
+                </div>
+                <!-- 技能3 -->
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-red-500 group hover:-translate-y-2 transition">
+                    <div class="h-48 image-box mb-6 rounded-xl">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Termite_mound_Tanzania.jpg/640px-Termite_mound_Tanzania.jpg" alt="白蚁巢穴" class="slide-img">
+                    </div>
+                    <h3 class="font-black text-2xl text-center mb-4 text-slate-800">白蚁杀手</h3>
+                    <p class="text-lg text-slate-600 font-bold text-center">专吃白蚁巢穴<br>保护森林健康</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Page 9: 毛冠鹿 ======================= -->
+    <section id="page9" class="slide-section bg-slate-800 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-16 items-center z-10">
+            <div class="order-2 md:order-1">
+                <div class="bg-orange-500 text-white px-4 py-2 text-xl font-black rounded-lg inline-block mb-6 shadow-lg rotate-2">
+                    明星档案 NO.2
+                </div>
+                <h2 class="text-7xl font-black mb-4">毛冠鹿</h2>
+                <h3 class="text-3xl text-slate-400 mb-8 italic font-bold">害羞的“帽子先生”</h3>
+                
+                <div class="bg-slate-700/50 p-8 rounded-3xl border-l-8 border-orange-500 space-y-6 backdrop-blur-md">
+                    <div class="flex items-start">
+                        <span class="text-4xl mr-4">🏠</span>
+                        <div>
+                            <h4 class="text-xl font-bold text-orange-400">住在哪？</h4>
+                            <p class="text-xl">海拔1000米以上的高山，躲在灌木丛里。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-4xl mr-4">🎩</span>
+                        <div>
+                            <h4 class="text-xl font-bold text-orange-400">为什么叫毛冠？</h4>
+                            <p class="text-xl">额头上有一撮黑色的毛，像戴了一顶帽子。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detective-tip bg-slate-700 border-white text-white mt-8">
+                    小侦探找茬：<br>
+                    <span class="text-lg font-normal">看看右边照片里，能不能找到它头顶那撮黑色的“头发”？</span>
+                </div>
+            </div>
+
+            <!-- 毛冠鹿图 -->
+            <div class="order-1 md:order-2 h-full min-h-[500px] image-box border-8 border-slate-500 shadow-2xl">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Tufted_Deer_Elaphodus_cephalophus.jpg/640px-Tufted_Deer_Elaphodus_cephalophus.jpg" alt="毛冠鹿" class="slide-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Page 10: 结语 ======================= -->
+    <section id="page10" class="slide-section bg-gradient-to-t from-green-200 to-white text-center">
+        <div class="max-w-5xl mx-auto w-full flex flex-col items-center justify-center h-full py-10">
+            <h2 class="text-6xl font-black text-green-900 mb-12">森林里的好朋友们</h2>
+            
+            <!-- 照片墙：各种动物 -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16 w-full px-4">
+                <!-- 獾 -->
+                <div class="h-48 image-box shadow-xl rotate-3 border-b-8 border-slate-200 group hover:z-20 hover:scale-110 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Hog_Badger_Kaeng_Krachan.jpg/640px-Hog_Badger_Kaeng_Krachan.jpg" alt="猪獾" class="slide-img">
+                    <div class="absolute bottom-0 w-full bg-black/50 text-white text-sm py-1">猪獾</div>
+                </div>
+                <!-- 小麂 -->
+                <div class="h-48 image-box shadow-xl -rotate-2 border-b-8 border-slate-200 group hover:z-20 hover:scale-110 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Muntiacus_reevesi_in_Taiwan.jpg/640px-Muntiacus_reevesi_in_Taiwan.jpg" alt="小麂" class="slide-img">
+                    <div class="absolute bottom-0 w-full bg-black/50 text-white text-sm py-1">小麂</div>
+                </div>
+                <!-- 野猪 -->
+                <div class="h-48 image-box shadow-xl rotate-1 border-b-8 border-slate-200 group hover:z-20 hover:scale-110 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Wild_Boar_Hayer.jpg/640px-Wild_Boar_Hayer.jpg" alt="野猪" class="slide-img">
+                    <div class="absolute bottom-0 w-full bg-black/50 text-white text-sm py-1">野猪</div>
+                </div>
+                <!-- 松鼠 -->
+                <div class="h-48 image-box shadow-xl -rotate-1 border-b-8 border-slate-200 group hover:z-20 hover:scale-110 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Callosciurus_erythraeus.jpg/640px-Callosciurus_erythraeus.jpg" alt="赤腹松鼠" class="slide-img">
+                    <div class="absolute bottom-0 w-full bg-black/50 text-white text-sm py-1">赤腹松鼠</div>
+                </div>
+                <!-- 豹猫 -->
+                <div class="h-48 image-box shadow-xl rotate-2 border-b-8 border-slate-200 group hover:z-20 hover:scale-110 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Prionailurus_bengalensis_euptilurus_1.jpg/640px-Prionailurus_bengalensis_euptilurus_1.jpg" alt="豹猫" class="slide-img">
+                    <div class="absolute bottom-0 w-full bg-black/50 text-white text-sm py-1">豹猫</div>
+                </div>
+                <!-- 中华鬣羚 -->
+                <div class="h-48 image-box shadow-xl -rotate-3 border-b-8 border-slate-200 group hover:z-20 hover:scale-110 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Capricornis_milneedwardsii.jpg/640px-Capricornis_milneedwardsii.jpg" alt="中华鬣羚" class="slide-img">
+                    <div class="absolute bottom-0 w-full bg-black/50 text-white text-sm py-1">中华鬣羚</div>
+                </div>
+            </div>
+
+            <div class="bg-white p-10 rounded-[3rem] shadow-2xl border-4 border-green-300 max-w-3xl mx-auto">
+                <h3 class="text-4xl font-black text-green-800 mb-6 leading-relaxed">
+                    保护野生动物<br>就是保护我们的<span class="text-green-500">家园</span>！
+                </h3>
+                
+                <button class="bg-yellow-400 hover:bg-yellow-300 text-yellow-900 text-3xl font-black px-16 py-6 rounded-full shadow-[0_8px_0_rgb(180,83,9)] transition transform hover:-translate-y-1 active:translate-y-1 active:shadow-none animate-bounce mt-4">
+                    我也要加入！🙋‍♂️
+                </button>
+            </div>
+            
+            <div class="mt-16 text-slate-400 text-lg font-bold flex items-center justify-center gap-2">
+                <i data-lucide="check-circle" size="20"></i> 课程结束 · 感谢观看
+            </div>
+        </div>
+    </section>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
