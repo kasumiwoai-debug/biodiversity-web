@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>磐安生物多样性友好城市建设问卷调查</title>
+    <style>
+        /* --- 全局样式 --- */
+        body {
+            font-family: "Microsoft YaHei", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4fbf6; /* 浅绿色背景 */
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* --- 容器样式 --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 100, 0, 0.1);
+        }
+
+        /* --- 标题与头部 --- */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: #2e7d32; /* 深绿色 */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .intro {
+            font-size: 14px;
+            color: #666;
+            text-align: left;
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        /* --- 章节样式 --- */
+        .section-title {
+            color: #388e3c;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #388e3c;
+            background-color: #f9f9f9;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        /* --- 问题样式 --- */
+        .question-block {
+            margin-bottom: 25px;
+        }
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .required-mark {
+            color: red;
+            margin-left: 5px;
+        }
+
+        /* --- 选项样式 --- */
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .options label:hover {
+            background-color: #f1f8e9;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+            accent-color: #2e7d32; /* 选中颜色 */
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        /* --- 提交按钮 --- */
+        .submit-btn {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin-top: 40px;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #1b5e20;
+        }
+
+        /* --- 成功提示页 --- */
+        #success-message {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .success-icon {
+            font-size: 60px;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        /* --- 手机适配 --- */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <form id="surveyForm">
+        <header>
+            <h1>磐安生物多样性友好城市建设<br>公众认知与意愿调查</h1>
+            <div class="intro">
+                <p>尊敬的女士/先生：您好！磐安县正在积极创建“生物多样性友好城市”。为了解大家对磐安生态环境及生物多样性保护的看法，特开展此次匿名问卷调查。感谢您的支持！</p>
+            </div>
+        </header>
+
+        <div class="section-title">第一部分：基本信息</div>
+        
+        <div class="question-block">
+            <span class="question-title">1. 您的性别：<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="radio" name="q1" value="男" required> 男</label>
+                <label><input type="radio" name="q1" value="女"> 女</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <span class="question-title">2. 您的年龄段：<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="radio" name="q2" value="18岁以下" required> 18岁以下</label>
+                <label><input type="radio" name="q2" value="18-30岁"> 18-30岁</label>
+                <label><input type="radio" name="q2" value="31-45岁"> 31-45岁</label>
+                <label><input type="radio" name="q2" value="46-60岁"> 46-60岁</label>
+                <label><input type="radio" name="q2" value="60岁以上"> 60岁以上</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <span class="question-title">3. 您在磐安的居住情况：<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="radio" name="q3" value="本地常住" required> 磐安本地常住居民</label>
+                <label><input type="radio" name="q3" value="外来务工"> 外来务工/经商人员</label>
+                <label><input type="radio" name="q3" value="游客"> 游客/短期访客</label>
+                <label><input type="radio" name="q3" value="其他"> 其他</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <span class="question-title">4. 您的职业背景：<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="radio" name="q4" value="党政机关" required> 党政机关/事业单位</label>
+                <label><input type="radio" name="q4" value="企业人员"> 企业人员/工商业主</label>
+                <label><input type="radio" name="q4" value="农林牧渔"> 农/林/牧/渔业从业者（含药材种植）</label>
+                <label><input type="radio" name="q4" value="学生"> 学生</label>
+                <label><input type="radio" name="q4" value="退休人员"> 退休人员</label>
+                <label><input type="radio" name="q4" value="其他"> 其他</label>
+            </div>
+        </div>
+
+        <div class="section-title">第二部分：认知度调查</div>
+
+        <div class="question-block">
+            <span class="question-title">5. 您是否听说过“生物多样性”这一概念？<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="radio" name="q5" value="非常了解" required> 非常了解</label>
+                <label><input type="radio" name="q5" value="大致知道"> 听说过，大致知道意思</label>
+                <label><input type="radio" name="q5" value="不了解"> 听说过，但不了解</label>
+                <label><input type="radio" name="q5" value="从未听说"> 从未听说过</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <span class="question-title">6. 您是否知道磐安县正在建设“生物多样性友好城市”？<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="radio" name="q6" value="参与过" required> 知道，并参与过相关活动</label>
+                <label><input type="radio" name="q6" value="听说过"> 听说过</label>
+                <label><input type="radio" name="q6" value="不知道"> 不知道</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <span class="question-title">7. 提到磐安的特色生物资源，您最先想到的是？(多选)<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="checkbox" name="q7" value="中药材"> “磐五味”等道地中药材</label>
+                <label><input type="checkbox" name="q7" value="野生动物"> 珍稀野生动物（如中华穿山甲等）</label>
+                <label><input type="checkbox" name="q7" value="森林资源"> 古树名木及森林资源</label>
+                <label><input type="checkbox" name="q7" value="农产品"> 特色农产品（如香菇、茶叶）</label>
+                <label><input type="checkbox" name="q7" value="不清楚"> 不太清楚</label>
+            </div>
+        </div>
+
+        <div class="section-title">第三部分：现状评价与感受</div>
+
+        <div class="question-block">
+            <span class="question-title">8. 您对磐安县目前的整体生态环境质量满意吗？<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="radio" name="q8" value="非常满意" required> 非常满意</label>
+                <label><input type="radio" name="q8" value="比较满意"> 比较满意</label>
+                <label><input type="radio" name="q8" value="一般"> 一般</label>
+                <label><input type="radio" name="q8" value="不太满意"> 不太满意</label>
+                <label><input type="radio" name="q8" value="非常不满意"> 非常不满意</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <span class="question-title">9. 您在日常生活中是否容易接触到自然（如公园、绿道、森林）？<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="radio" name="q9" value="非常容易" required> 非常容易，出门即见绿</label>
+                <label><input type="radio" name="q9" value="比较容易"> 比较容易</label>
+                <label><input type="radio" name="q9" value="一般"> 一般</label>
+                <label><input type="radio" name="q9" value="比较困难"> 比较困难</label>
+                <label><input type="radio" name="q9" value="非常困难"> 非常困难</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <span class="question-title">10. 您认为目前磐安在城市建设中，对动植物栖息地的保护做得如何？<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="radio" name="q10" value="很好" required> 保护得很好，随处可见小动物</label>
+                <label><input type="radio" name="q10" value="还可以"> 还可以，保留了一些自然空间</label>
+                <label><input type="radio" name="q10" value="一般"> 一般，人工痕迹过重</label>
+                <label><input type="radio" name="q10" value="较差"> 较差，破坏了原有的生态</label>
+                <label><input type="radio" name="q10" value="不清楚"> 不清楚</label>
+            </div>
+        </div>
+
+        <div class="section-title">第四部分：友好城市建设需求</div>
+
+        <div class="question-block" id="q11-block">
+            <span class="question-title">11. 您认为建设“生物多样性友好城市”，磐安最需要改进的是？(最多选3项)<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="checkbox" name="q11" value="城市绿化"> 城市绿化：增加公园绿地，种植本土植物</label>
+                <label><input type="checkbox" name="q11" value="生态廊道"> 生态廊道：建设生物通道，方便动物迁徙</label>
+                <label><input type="checkbox" name="q11" value="农业转型"> 农业转型：减少农药化肥，推广生态种植</label>
+                <label><input type="checkbox" name="q11" value="科普教育"> 科普教育：增加场馆、解说牌和宣传活动</label>
+                <label><input type="checkbox" name="q11" value="污染治理"> 污染治理：加强水体、空气和土壤防治</label>
+                <label><input type="checkbox" name="q11" value="光声环境"> 光/声环境：减少夜间光污染和噪音</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <span class="question-title">12. 您认为在磐安的特色产业中，如何更好地融入生物多样性保护？(多选)<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="checkbox" name="q12" value="林下经济"> 推广林下经济，模拟野生环境种植药材</label>
+                <label><input type="checkbox" name="q12" value="生态红线"> 限制旅游开发强度，设立生态红线区</label>
+                <label><input type="checkbox" name="q12" value="生态旅游"> 开发以“自然观察/研学”为主题的产品</label>
+                <label><input type="checkbox" name="q12" value="产品认证"> 建立生态产品认证机制</label>
+            </div>
+        </div>
+
+        <div class="section-title">第五部分：个人参与意愿</div>
+
+        <div class="question-block">
+            <span class="question-title">13. 如果政府组织相关的生物多样性保护活动，您愿意参加吗？<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="radio" name="q13" value="非常愿意" required> 非常愿意</label>
+                <label><input type="radio" name="q13" value="看时间"> 看时间安排</label>
+                <label><input type="radio" name="q13" value="不太愿意"> 不太愿意</label>
+                <label><input type="radio" name="q13" value="不愿意"> 不愿意</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <span class="question-title">14. 在日常生活中，您愿意为保护生物多样性做出哪些改变？(多选)<span class="required-mark">*</span></span>
+            <div class="options">
+                <label><input type="checkbox" name="q14" value="不食野味"> 不购买、不食用受保护的野生动植物</label>
+                <label><input type="checkbox" name="q14" value="减少塑料"> 减少使用一次性塑料制品</label>
+                <label><input type="checkbox" name="q14" value="生态产品"> 优先购买生态友好的农产品/中药材</label>
+                <label><input type="checkbox" name="q14" value="宣传"> 向身边人宣传环保知识</label>
+                <label><input type="checkbox" name="q14" value="举报"> 发现破坏生态行为及时举报</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <span class="question-title">15. 对于磐安建设生物多样性友好城市，您还有什么具体的建议或意见？</span>
+            <textarea name="q15" rows="4" placeholder="请输入您的宝贵建议..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">提交问卷</button>
+    </form>
+
+    <div id="success-message">
+        <div class="success-icon">✓</div>
+        <h2>提交成功！</h2>
+        <p>非常感谢您为磐安生物多样性友好城市建设贡献一份力量！</p>
+        <p>您的意见对我们至关重要。</p>
+        <button onclick="location.reload()" class="submit-btn" style="margin-top: 20px; background-color: #666;">返回</button>
+    </div>
+</div>
+
+<script>
+    // 处理第11题：限制最多选3项
+    const limitCheckboxes = document.querySelectorAll('input[name="q11"]');
+    limitCheckboxes.forEach(box => {
+        box.addEventListener('change', function() {
+            const checkedCount = document.querySelectorAll('input[name="q11"]:checked').length;
+            if (checkedCount > 3) {
+                this.checked = false;
+                alert("第11题最多只能选择3项哦！");
+            }
+        });
+    });
+
+    // 处理表单提交模拟
+    document.getElementById('surveyForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // 阻止表单默认提交行为（因为没有后台服务器）
+        
+        // 检查多选题是否至少选了一项 (针对q7, q11, q12, q14)
+        const multiQuestions = ['q7', 'q11', 'q12', 'q14'];
+        let valid = true;
+        
+        multiQuestions.forEach(name => {
+            const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
+            if (checked.length === 0) {
+                alert("请检查多选题是否已作答（第7、11、12、14题）。");
+                valid = false;
+                return; // 这里的return只是跳出forEach的当前回调，不能完全停止
+            }
+        });
+
+        if (!valid) return;
+
+        // 模拟提交成功
+        // 在实际项目中，这里会使用 fetch 或 ajax 将数据发送到服务器
+        console.log("Form Submitted"); 
+        
+        // 隐藏表单，显示成功信息
+        document.getElementById('surveyForm').style.display = 'none';
+        document.getElementById('success-message').style.display = 'block';
+        
+        // 滚动到顶部
+        window.scrollTo(0, 0);
+    });
+</script>
+
+</body>
+</html>
