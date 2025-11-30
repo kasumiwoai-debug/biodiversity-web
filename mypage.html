@@ -2,10 +2,792 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>我的新网页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>磐安生多课堂：两栖爬行动物侦探记</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 引入 ZCOOL KuaiLe (卡通字体) 和 Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+/* 1. 全局设置 - 卡通大自然主题 */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /* 蓝天绿草的背景 */
+  background-color: #87CEEB; 
+  background-image: 
+    linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 100%);
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr;
+  margin: 0;
+  min-height: 100vh;
+  padding: 40px 0;
+  place-items: center;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+/* 每一页像是一个画板或展示牌 */
+.slide-container {
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 30px; /* 大圆角 */
+  box-shadow: 
+    0 10px 0 #64b5f6, /* 卡通风格的厚阴影 */
+    0 20px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  height: 720px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 30px 50px; /* 稍微减少内边距给大字体腾空间 */
+  position: relative;
+  width: 1280px;
+  border: 8px solid #fff;
+}
+
+/* 装饰性元素：角落的叶子 */
+.slide-container::before {
+    content: '\f06c'; /* Leaf icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 40px;
+    color: #a5d6a7;
+    transform: rotate(-45deg);
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.slide-container::after {
+    content: '\f1b0'; /* Paw icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 50px;
+    color: #ffcc80;
+    transform: rotate(15deg);
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.slide-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 2. 字体与排版 - 【保持大字体】 */
+
+/* 标题 - 使用快乐体 */
+.slide-container h1,
+.slide-container h2,
+.slide-container h3,
+.slide-title {
+  color: #2e7d32; /* 森林绿 */
+  font-family: 'ZCOOL KuaiLe', cursive; /* 卡通字体 */
+  margin: 0;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0px #e8f5e9;
+}
+
+/* 正文 */
+.slide-container p,
+.slide-container li,
+.slide-container .subtitle {
+  color: #546e7a;
+  font-family: 'Noto Sans SC', sans-serif;
+  line-height: 1.5; /* 行高稍微调小一点点，避免大字太占垂直空间 */
+  font-weight: 600; /* 加粗一点更清晰 */
+}
+
+/* 字体大小调整区域 */
+.slide-container h1 {
+  font-size: 110px; /* 放大 */
+  color: #ff6f00; /* 活力橙 */
+  text-shadow: 4px 4px 0px #fff, 6px 6px 0px #ffe082;
+  margin-bottom: 20px;
+}
+
+.slide-container .slide-title {
+  font-size: 64px; /* 放大 */
+  margin-bottom: 30px;
+  text-align: center;
+  width: 100%;
+  background-color: #fff9c4; /* 浅黄色高亮背景 */
+  display: inline-block;
+  padding: 10px 40px;
+  border-radius: 60px;
+  border: 4px dashed #fdd835;
+  color: #f57f17;
+}
+
+.slide-container h3 {
+  font-size: 44px; /* 放大 */
+  margin-bottom: 15px;
+  color: #0277bd; /* 活泼蓝 */
+  text-shadow: none;
+}
+
+.slide-container p,
+.slide-container li {
+  font-size: 32px; /* 大幅放大正文 */
+}
+
+.slide-container .subtitle {
+  font-size: 42px; /* 放大 */
+  background-color: #e1f5fe;
+  padding: 15px 40px;
+  border-radius: 30px;
+  color: #0288d1;
+  display: inline-block;
+}
+
+/* 3. 布局工具 */
+
+.content-area {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  width: 100%;
+}
+
+/* 双栏布局 */
+.two-column {
+  align-items: center; /* 垂直居中 */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  width: 100%;
+}
+
+/* 图片容器 - 像贴纸或照片 */
+.image-wrapper {
+  background: #fff;
+  border: 6px solid #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+  transform: rotate(-2deg); /* 俏皮的倾斜 */
+  height: 380px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.image-wrapper:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.image-wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.image-caption {
+    background: #ffecb3;
+    padding: 10px;
+    text-align: center;
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 28px; /* 放大 */
+    color: #ef6c00;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 5;
+}
+
+/* 列表样式 */
+ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+li {
+    margin-bottom: 20px;
+    padding-left: 50px;
+    position: relative;
+    background-color: rgba(255,255,255,0.6);
+    padding: 12px 12px 12px 60px;
+    border-radius: 15px;
+}
+
+li::before {
+    content: '\f111'; /* Circle */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #66bb6a; /* Green dot */
+    font-size: 16px; /* 放大 */
+    border: 4px solid #a5d6a7;
+    border-radius: 50%;
+    width: 26px; /* 放大 */
+    height: 26px; /* 放大 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 卡片布局 */
+.tiled-content {
+  align-items: stretch;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+}
+
+.tile {
+  background-color: #fff;
+  border: 4px solid #b3e5fc; /* 浅蓝边框 */
+  border-radius: 25px;
+  padding: 30px;
+  flex: 1;
+  text-align: center;
+  box-shadow: 0 8px 0 #b3e5fc; /* 卡通立体感 */
+  position: relative;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tile:hover {
+    transform: translateY(-5px);
+}
+
+.tile .icon {
+  font-size: 70px; /* 放大 */
+  color: #29b6f6;
+  margin-bottom: 20px;
+  background: #e1f5fe;
+  width: 110px;
+  height: 110px;
+  line-height: 110px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* 全背景图片 */
+.full-bg-image {
+    background-size: cover;
+    background-position: center;
+    border: 8px solid #fff;
+    position: relative; /* 确保 photo-id 定位 */
+}
+.full-bg-image .content-overlay {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 50px;
+    border-radius: 30px;
+    max-width: 1000px;
+    text-align: center;
+    border: 5px solid #81c784;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2; /* 确保文字在 photo-id 上面，或者下面，视需求而定。这里放上面 */
+}
+
+/* 左右分栏（带出血图）的修改版 */
+.slide-container.bleed-image-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0;
+  gap: 0;
+  align-items: stretch;
+  overflow: hidden;
+  border: 8px solid #fff; /* White frame */
+}
+
+.slide-container.bleed-image-layout .content-container {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f1f8e9; /* 浅浅的绿色背景 */
+}
+
+.slide-container.bleed-image-layout .image-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.slide-container.bleed-image-layout img.bleed-image-side {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* 引用样式 */
+.quote-layout blockquote {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 56px; /* 放大 */
+    color: #fff;
+    background: #ffa726; /* Orange background */
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 5px 5px 0 #ef6c00;
+    position: relative;
+    border: 4px dashed #fff;
+    line-height: 1.4;
+}
+
+.quote-layout blockquote::before {
+    content: '\f10d';
+    font-family: 'Font Awesome 6 Free';
+    position: absolute;
+    top: -40px;
+    left: 40px;
+    font-size: 70px;
+    color: #ffcc80;
+    background: #fff;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #ffa726;
+}
+
+.quote-layout cite {
+    display: block;
+    margin-top: 25px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: bold;
+    color: #f57c00;
+    text-align: right;
+    font-size: 32px; /* 放大 */
+}
+
+/* 时间轴特殊样式 */
+.timeline-item h3 {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    color: #d84315;
+    font-size: 36px;
+}
+
+/* 夜间模式特殊样式 */
+.night-mode .content-container {
+    background-color: #283593 !important; /* 深蓝色 */
+    color: #fff !important;
+}
+.night-mode h2, .night-mode h3, .night-mode p, .night-mode li {
+    color: #e8eaf6 !important;
+    text-shadow: none !important;
+}
+.night-mode .slide-title {
+    background-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.3);
+    color: #ffeb3b;
+}
+
+/* 4. 图片占位符标识 (New) */
+.photo-id {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 69, 0, 0.85); /* 鲜艳的红橙色 */
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 40px;
+    font-weight: bold;
+    border: 4px dashed #fff;
+    border-radius: 20px;
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-transform: uppercase;
+    font-family: sans-serif;
+    pointer-events: none; /* 让鼠标点击穿透，不影响操作 */
+    white-space: nowrap;
+}
+
+    </style>
 </head>
 <body>
-    <h1>这是我的新网页</h1>
-    <p>欢迎来到 biodiversity-web 的新页面！</p>
+
+<!-- Slide 1: Title (The Mission Brief) -->
+<!-- PHOTO 1: 背景图 -->
+<div class="slide-container full-bg-image" id="slide1" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/5236283008458067269');">
+    <div class="photo-id">Photo 1</div>
+    <div class="content-overlay">
+        <h1><i class="fa-solid fa-magnifying-glass" style="font-size: 0.8em; color: #4caf50;"></i> 磐安秘密任务</h1>
+        <p class="subtitle">生多课堂：两栖爬行动物侦探记</p>
+        <p style="margin-top: 30px; font-size: 24px; color: #555; background: #fff; padding: 15px 30px; border-radius: 15px; display: inline-block;">
+            <i class="fa-solid fa-user-shield"></i> 水陆特工队集结！
+        </p>
+    </div>
+</div>
+
+<!-- Slide 2: Location (The Base) -->
+<!-- PHOTO 2: 地图 -->
+<div class="slide-container bleed-image-layout" id="slide2">
+    <div class="content-container">
+        <h2 class="slide-title">第一站：特工基地</h2>
+        <div class="content-area">
+            <h3><i class="fa-solid fa-location-dot"></i> 目标坐标：浙江磐安</h3>
+            <p>欢迎来到“群山之祖，诸水之源”！这里是动植物们的快乐家园。</p>
+            <br>
+            <h3><i class="fa-solid fa-bullseye"></i> 我们的任务</h3>
+            <p>找出这里藏着哪些珍稀的“小精灵”（物种），并画出它们的分布图，保护它们的家！</p>
+        </div>
+    </div>
+    <div class="image-container">
+        <div class="photo-id">Photo 2</div>
+        <img class="bleed-image-side" src="http://googleusercontent.com/image_collection/image_retrieval/10072593006935814819" alt="Map of Zhejiang Province highlighting Pan'an">
+        <!-- 装饰 -->
+        <div style="position: absolute; top: 20px; right: 20px; font-size: 80px; color: #ff5252; transform: rotate(20deg); text-shadow: 2px 2px 0 #fff;">
+            <i class="fa-solid fa-map-location-dot"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 3: Comparison (The Subjects) -->
+<!-- PHOTO 3: 蛙蛇对比图 -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">谁是“水陆特工”？</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <h3><i class="fa-solid fa-frog" style="color:#66bb6a;"></i> 两栖动物 (小青蛙)</h3>
+                <ul style="background: #e8f5e9; border-radius: 20px; padding: 25px;">
+                    <li><strong>皮肤：</strong> 湿湿的，滑滑的。</li>
+                    <li><strong>本领：</strong> 水里游，岸上跳。</li>
+                    <li><strong>代表：</strong> 蛙类、蝾螈。</li>
+                </ul>
+            </div>
+            <div>
+                <div class="image-wrapper">
+                    <div class="photo-id">Photo 3</div>
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/8469049494645258631" alt="Illustration contrasting a frog and a snake">
+                    <div class="image-caption">左边滑溜溜，右边有鳞片！</div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 20px; background: #fff3e0; padding: 15px 30px; border-radius: 20px; border: 3px dashed #ffb74d;">
+            <p style="margin:0; color: #ef6c00; font-size: 28px;"><strong>爬行动物 (如蛇、龟)：</strong> 穿着盔甲（鳞片或壳），喜欢在陆地上晒太阳！</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Grid System (The Plan) -->
+<!-- PHOTO 4: 网格图 -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">寻宝地图：17个神秘方块</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <div class="image-wrapper" style="transform: rotate(2deg);">
+                    <div class="photo-id">Photo 4</div>
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/9715346826263543910" alt="Grid map overlay concept on forest landscape">
+                    <div class="image-caption">就像把森林切成了小蛋糕！</div>
+                </div>
+            </div>
+            <div>
+                <h3><i class="fa-solid fa-border-all"></i> 网格大搜索</h3>
+                <ul>
+                    <li>科学家把磐安画成了 <strong>21 个大方块</strong>。</li>
+                    <li>我们重点搜查其中的 <strong>17 个方块</strong>。</li>
+                    <li><strong>特别关注：</strong> 保护区里藏着更多秘密，要用放大镜看！</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Red Lines (Protected Areas) -->
+<!-- PHOTO 5: 红线图 -->
+<div class="slide-container bleed-image-layout" id="slide5">
+    <div class="content-container">
+        <h2 class="slide-title">红色警戒线：安全屋</h2>
+        <div class="content-area">
+            <h3><i class="fa-solid fa-shield-heart" style="color: #ff5252;"></i> 动物们的避难所</h3>
+            <p>有 <strong>36.41%</strong> 的土地被画上了红线，这里是绝对安全的家。</p>
+            <br>
+            <h3>红线里有什么？</h3>
+            <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
+                <span style="background: #e1f5fe; color: #0288d1; padding: 15px 30px; border-radius: 20px; font-size: 28px;">很多小动物</span>
+                <span style="background: #e0f2f1; color: #00695c; padding: 15px 30px; border-radius: 20px; font-size: 28px;">干净的水源</span>
+            </div>
+        </div>
+    </div>
+    <div class="image-container">
+        <div class="photo-id">Photo 5</div>
+        <img class="bleed-image-side" src="http://googleusercontent.com/image_collection/image_retrieval/1946176643404981756" alt="Ecological protection red line map concept">
+    </div>
+</div>
+
+<!-- Slide 6: Methodology Stats (The Weapon) -->
+<!-- NO PHOTO -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">特工装备：样线法</h2>
+    <div class="content-area">
+        <p style="text-align: center; margin-bottom: 30px; font-size: 36px;">我们沿着固定的路线走，看看路边躲着谁？</p>
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-shoe-prints"></i></div>
+                <h3>63 条</h3>
+                <p>探险路线</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-mountain-sun"></i></div>
+                <h3>高高低低</h3>
+                <p>山脚到山顶(1228m)</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-tree"></i></div>
+                <h3>到处都去</h3>
+                <p>森林、小溪、农田</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Night Survey (Investigation 1) -->
+<!-- PHOTO 6: 夜间调查 -->
+<div class="slide-container bleed-image-layout night-mode" id="slide7">
+    <div class="image-container">
+        <div class="photo-id">Photo 6</div>
+        <img class="bleed-image-side" src="http://googleusercontent.com/image_collection/image_retrieval/6354489044481270310" alt="Researcher using flashlight in stream at night">
+         <div style="position: absolute; top: 20px; left: 20px; font-size: 60px; color: #ffeb3b;">
+            <i class="fa-solid fa-moon"></i>
+        </div>
+    </div>
+    <div class="content-container">
+        <h2 class="slide-title">夜间行动：嘘！</h2>
+        <div class="content-area">
+            <h3>时间：19:00 - 24:00</h3>
+            <p>天黑了，蛙类特工才出门上班。我们打着手电筒悄悄地找。</p>
+            <br>
+            <h3><i class="fa-solid fa-ear-listen"></i> 秘密技能</h3>
+            <ul>
+                <li><strong>像乌龟一样慢：</strong> 1小时只走1公里。</li>
+                <li><strong>听声辨位：</strong> “呱呱”——抓住你了！</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Day Survey (Investigation 2) -->
+<!-- PHOTO 7: 白天调查 -->
+<div class="slide-container bleed-image-layout" id="slide8">
+    <div class="content-container">
+        <h2 class="slide-title">白天巡逻：晒太阳</h2>
+        <div class="content-area">
+            <h3><i class="fa-solid fa-sun" style="color: orange;"></i> 最佳时间</h3>
+            <p>太阳刚出来或者快下山的时候，蛇和蜥蜴会出来把身体晒暖和。</p>
+            <br>
+            <h3><i class="fa-solid fa-road"></i> 路上的线索</h3>
+            <p>如果发现公路上有不幸遇难的小动物（路死个体），虽然很伤心，但也要记录下来。</p>
+        </div>
+    </div>
+    <div class="image-container">
+        <div class="photo-id">Photo 7</div>
+        <img class="bleed-image-side" src="http://googleusercontent.com/image_collection/image_retrieval/1610744099517459972" alt="Snake basking in the sun">
+    </div>
+</div>
+
+<!-- Slide 9: Identification (The Lab) -->
+<!-- PHOTO 8: 实验室/DNA -->
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">我是谁？身份大揭秘</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <h3><i class="fa-solid fa-book-journal-whills"></i> 查户口本</h3>
+                <p>翻阅厚厚的《中国两栖类》和《中国蛇类》图鉴，对比照片。</p>
+            </div>
+            <div>
+                 <h3><i class="fa-solid fa-microscope"></i> 基因侦探 (DNA)</h3>
+                 <p>如果长得太像分不清？</p>
+                 <div style="background: #e3f2fd; padding: 20px; border-radius: 20px; margin-top: 15px;">
+                    带一点点样本回实验室，破解它的<strong>基因密码</strong>！
+                 </div>
+            </div>
+        </div>
+        <div class="image-wrapper" style="height: 220px; margin-top: 30px; transform: rotate(0deg); border-color: #bbdefb;">
+             <div class="photo-id">Photo 8</div>
+             <img src="http://googleusercontent.com/image_collection/image_retrieval/10162193095854837802" alt="DNA sequencing laboratory equipment" style="object-fit: cover;">
+        </div>
+    </div>
+</div>
+
+<!-- Slide 10: Timeline -->
+<!-- PHOTO 9: 时间轴背景 -->
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">五次探险日记</h2>
+    <div class="content-area">
+        <div class="timeline-layout" style="background: #fff; padding: 30px; border-radius: 30px; border: 4px dashed #ffb74d; position: relative; width: 100%;">
+            <div class="photo-id" style="color: #d84315; border-color: #d84315; background-color: rgba(255,255,255,0.8);">Photo 9 (Optional BG)</div>
+            <!-- Visual Track -->
+            <div style="position: absolute; top: 50%; left: 20px; right: 20px; height: 10px; background: #ffe0b2; border-radius: 5px; z-index: 0;"></div>
+            
+            <div style="display: flex; justify-content: space-between; position: relative; z-index: 1;">
+                <div class="tile" style="padding: 10px; transform: rotate(-5deg); width: 22%; min-height: 180px;">
+                    <h3>5月</h3>
+                    <p>醒来啦！</p>
+                </div>
+                <div class="tile" style="padding: 10px; transform: rotate(5deg); width: 22%; background: #fff9c4; min-height: 180px;">
+                    <h3>6月</h3>
+                    <p>最热闹！</p>
+                </div>
+                <div class="tile" style="padding: 10px; transform: rotate(-3deg); width: 22%; min-height: 180px;">
+                    <h3>7月</h3>
+                    <p>还在玩~</p>
+                </div>
+                 <div class="tile" style="padding: 10px; transform: rotate(2deg); width: 22%; min-height: 180px;">
+                    <h3>8月</h3>
+                    <p>总结啦！</p>
+                </div>
+            </div>
+        </div>
+        <p style="margin-top: 30px; text-align: center; color: #d84315; font-size: 32px;">2021年的夏天，我们陪小动物们度过了最快乐的时光。</p>
+    </div>
+</div>
+
+<!-- Slide 11: Success (Mission Accomplished) -->
+<!-- PHOTO 10: 成功印章 -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">任务报告：大成功！</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                 <div class="image-wrapper" style="transform: rotate(-5deg); height: 350px; border-color: #c8e6c9;">
+                    <div class="photo-id">Photo 10</div>
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/1497105343927377115" alt="Mission Accomplished Stamp Concept">
+                    <div class="image-caption">盖章认证！</div>
+                </div>
+            </div>
+            <div>
+                <h3><i class="fa-solid fa-clipboard-check" style="color: #43a047;"></i> 成绩单</h3>
+                <ul style="font-size: 30px;">
+                    <li><strong>次数：</strong> 5次 (满分!)</li>
+                    <li><strong>地点：</strong> 17个方块 (全覆盖!)</li>
+                    <li><strong>路线：</strong> 63条路 (走遍了!)</li>
+                </ul>
+                <div style="background: #fff3e0; padding: 25px; border-radius: 20px; margin-top: 20px; text-align: center;">
+                    <i class="fa-solid fa-star" style="color: #ffb300;"></i> 
+                    <span style="color: #e65100; font-weight: bold; font-size: 36px;">非常棒的本底数据！</span>
+                    <i class="fa-solid fa-star" style="color: #ffb300;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Threats (The Danger) -->
+<!-- PHOTO 11, PHOTO 12: 偷猎和破坏 -->
+<div class="slide-container" id="slide12">
+    <h2 class="slide-title">危险！危险！</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile" style="border-color: #ffcdd2;">
+                <!-- Replaced icon with Image Wrapper for Photo 11 -->
+                 <div class="image-wrapper" style="height: 250px; margin-bottom: 20px; border: none; transform: none; box-shadow: none;">
+                    <div class="photo-id" style="font-size: 30px; padding: 10px;">Photo 11</div>
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/14404670354225569261" alt="Poaching trap">
+                </div>
+                <h3>偷猎坏蛋</h3>
+                <p>有人想抓走它们去卖钱，太可恶了！</p>
+            </div>
+            <div class="tile" style="border-color: #ffcdd2;">
+                 <!-- Replaced icon with Image Wrapper for Photo 12 -->
+                 <div class="image-wrapper" style="height: 250px; margin-bottom: 20px; border: none; transform: none; box-shadow: none;">
+                    <div class="photo-id" style="font-size: 30px; padding: 10px;">Photo 12</div>
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/421634591922486893" alt="Habitat destruction">
+                </div>
+                <h3>破坏家园</h3>
+                <p>挖掘机挖断了河流和山坡，小动物找不到回家的路。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 13: Strategy (The Big Picture) -->
+<!-- NO PHOTO -->
+<div class="slide-container" id="slide13">
+    <h2 class="slide-title">千年大计</h2>
+    <div class="content-area">
+        <div class="quote-layout">
+            <blockquote>
+                保护好这里的一草一木，就是保护我们自己的未来。
+            </blockquote>
+            <cite>—— 磐安生物多样性保护</cite>
+        </div>
+        <div style="margin-top: 40px; text-align: center;">
+            <i class="fa-solid fa-seedling" style="font-size: 80px; color: #66bb6a;"></i>
+            <i class="fa-solid fa-earth-asia" style="font-size: 80px; color: #29b6f6; margin: 0 30px;"></i>
+            <i class="fa-solid fa-dove" style="font-size: 80px; color: #ffca28;"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 14: Action (Little Guardians) -->
+<!-- PHOTO 13: 博物馆/儿童 -->
+<div class="slide-container" id="slide14">
+    <h2 class="slide-title">成为“小小卫士”</h2>
+    <div class="content-area">
+        <div class="two-column">
+             <div>
+                <h3><i class="fa-solid fa-hand-fist" style="color: #ffca28;"></i> 我们可以做什么？</h3>
+                <ul>
+                    <li><strong>去博物馆：</strong> 大盘山博物馆里有很多故事。</li>
+                    <li><strong>告诉朋友：</strong> 不要捕捉野生青蛙。</li>
+                    <li><strong>一起努力：</strong> 和大家一起守护绿色家园！</li>
+                </ul>
+            </div>
+            <div>
+                 <div class="image-wrapper">
+                    <div class="photo-id">Photo 13</div>
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/14359766088160150898" alt="Kids exploring nature museum cartoon">
+                    <div class="image-caption">我们出发吧！</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 15: Conclusion -->
+<!-- PHOTO 14: 结尾背景 -->
+<div class="slide-container full-bg-image" id="slide15" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/7849014184600724748');">
+    <div class="photo-id">Photo 14</div>
+    <div class="content-overlay">
+        <h2>守护家园，未完待续...</h2>
+        <p class="subtitle">这本“自然百科全书”，需要我们接着写下去！</p>
+        <div style="margin-top: 50px;">
+             <i class="fa-solid fa-frog" style="font-size: 80px; color: #66bb6a; animation: bounce 1s infinite;"></i>
+        </div>
+        <p style="margin-top: 40px; font-weight: bold; color: #2e7d32; font-size: 40px;">谢谢大家！</p>
+    </div>
+</div>
+
+<style>
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+</style>
+
 </body>
 </html>
