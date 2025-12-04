@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Technical and Scientific Cooperation Mechanism</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+/* 1. THE SETUP */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e2e8f0;
+  display: grid;
+  gap: 30px; /* 增加间距 */
+  grid-template-columns: 1fr;
+  margin: 0;
+  min-height: 100vh;
+  padding: 40px 0;
+  place-items: center;
+}
+
+/* Control Bar Style */
+.control-bar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.btn {
+    background: #1B5E20;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+    text-decoration: none;
+}
+.btn:hover { background: #2E7D32; }
+.btn-secondary { background: #0277BD; }
+.btn-secondary:hover { background: #01579B; }
+
+.slide-container {
+  align-items: center;
+  background-color: #f4f9f4; /* Light Eco Mint */
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  height: 800px; /* 稍微增加高度以适应大字体 */
+  justify-content: center;
+  overflow: hidden;
+  padding: 50px 70px; /* 调整内边距 */
+  position: relative;
+  width: 1400px; /* 稍微增加宽度 */
+}
+
+/* 2. TYPOGRAPHY (Larger Fonts) */
+.slide-container h1,
+.slide-container h2,
+.slide-container h3 {
+  color: #1B5E20; /* Forest Green */
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+.slide-container p,
+.slide-container li,
+.slide-container .subtitle,
+.slide-container .number-label,
+.slide-container td,
+.slide-container div {
+  color: #263238; /* Dark Slate */
+  font-family: 'Lato', sans-serif;
+  font-size: 26px; /* 基础字体由18px增大至26px */
+  line-height: 1.5;
+}
+
+.slide-container h1 { font-size: 72px; line-height: 1.2; } /* 标题加大 */
+.slide-container .slide-title { 
+    font-size: 52px; /* 页标题加大 */
+    margin-bottom: 40px; 
+    text-align: left; 
+    width: 100%; 
+    border-bottom: 4px solid #FBC02D; 
+    padding-bottom: 20px;
+}
+.slide-container h3 { 
+    font-size: 34px; /* 小标题加大 */
+    font-weight: 700; 
+    margin-bottom: 15px; 
+    color: #0277BD; 
+}
+.slide-container strong {
+    color: #1B5E20;
+}
+
+/* 3. LAYOUTS */
+.content-area {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Full Background Image */
+.full-bg-image {
+  background-position: center;
+  background-size: cover;
+}
+.full-bg-image .content-overlay {
+  background: rgba(255, 255, 255, 0.92); /* 增加不透明度以提高对比度 */
+  padding: 60px;
+  border-radius: 8px;
+  border-left: 12px solid #1B5E20;
+  text-align: left;
+  max-width: 1000px;
+}
+
+/* Tiled Text with Icons */
+.tiled-content {
+  align-items: stretch;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap; /* 允许换行 */
+}
+.tile {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border-top: 6px solid #1B5E20;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.05);
+  flex: 1;
+  min-width: 200px;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tile .icon {
+  color: #FBC02D;
+  font-size: 56px; /* 图标加大 */
+  margin-bottom: 20px;
+}
+
+/* Timeline */
+.timeline-layout {
+  align-items: stretch;
+  display: flex;
+  height: auto;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+.timeline-layout .timeline-line {
+  background-color: #1B5E20;
+  height: 6px; /* 线条加粗 */
+  left: 0;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  z-index: 0;
+}
+.timeline-item {
+  position: relative;
+  text-align: center;
+  width: 20%;
+}
+.timeline-item::after {
+  background-color: #fff;
+  border: 5px solid #FBC02D;
+  border-radius: 50%;
+  content: '';
+  height: 30px; /* 节点加大 */
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  z-index: 1;
+}
+.timeline-item .content-wrapper {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  position: absolute;
+  width: 240px; /* 增加宽度 */
+  left: 50%;
+  transform: translateX(-50%);
+}
+.timeline-item:nth-child(odd) .content-wrapper { bottom: 70px; }
+.timeline-item:nth-child(even) .content-wrapper { top: 70px; }
+.timeline-item p { font-size: 20px; } /* 时间轴内容字体稍微小一点，但也比原来大 */
+
+/* Bleed Image Right */
+.slide-container.bleed-image-layout {
+  display: grid;
+  grid-template-columns: 55% 45%; /* 调整比例给文字更多空间 */
+  align-items: start;
+  padding: 0;
+  background-color: #fff;
+}
+.slide-container.bleed-image-layout > .content-container {
+  padding: 60px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.slide-container.bleed-image-layout > .image-container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.slide-container.bleed-image-layout img.bleed-image-side {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Two Column Tiled */
+.two-column.tiled {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  width: 100%;
+}
+.two-column.tiled > div {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  border-left: 8px solid #0277BD;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+/* Styled Bullet Points */
+.bullet-list ul {
+  list-style: none;
+  padding: 0;
+}
+.bullet-list li {
+  margin-bottom: 25px;
+  padding-left: 60px;
+  position: relative;
+  font-size: 28px; /* 列表字体加大 */
+}
+.bullet-list i {
+  color: #1B5E20;
+  font-size: 36px; /* 图标加大 */
+  left: 0;
+  position: absolute;
+  top: 4px;
+}
+
+/* Numbered List for Functions */
+.numbered-list {
+    counter-reset: func-counter;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+.numbered-list-item {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    position: relative;
+    padding-left: 80px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+.numbered-list-item::before {
+    counter-increment: func-counter;
+    content: counter(func-counter);
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #1B5E20;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+/* Highlighted Numbers */
+.highlight-numbers-layout {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.highlight-numbers-layout > div {
+  text-align: center;
+  flex: 1;
+}
+.highlight-numbers-layout .number {
+  color: #FBC02D;
+  font-size: 100px; /* 数字特大 */
+  font-weight: 700;
+  font-family: 'Noto Serif SC', serif;
+}
+.highlight-numbers-layout .number-label {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1B5E20;
+  margin-bottom: 10px;
+}
+
+/* Single Box Layout (For Context) */
+.single-box {
+    background: white;
+    padding: 50px;
+    border-radius: 15px;
+    border-left: 15px solid #FBC02D;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    max-width: 1100px;
+}
+
+/* PRINT MEDIA QUERY - Critical for PDF export */
+@media print {
+    body {
+        background: none;
+        padding: 0;
+        margin: 0;
+        display: block;
+    }
+    .control-bar {
+        display: none !important;
+    }
+    .slide-container {
+        break-after: page;
+        page-break-after: always;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        width: 100%;
+        height: 100vh; /* Make sure it fills the page */
+        border-radius: 0;
+    }
+}
+    </style>
+</head>
+<body>
+
+<!-- Control Bar for Saving -->
+<div class="control-bar">
+    <button onclick="window.print()" class="btn"><i class="fa-solid fa-file-pdf"></i> 保存为 PDF (打印)</button>
+    <div style="font-size: 12px; color: #555;">提示: 选择“另存为 PDF”并将布局设为“横向”</div>
+</div>
+
+<!-- Slide 1: Title Slide -->
+<div class="slide-container full-bg-image" id="slide1" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/6478913103522954113');">
+    <div class="content-overlay">
+        <h1>《生物多样性公约》<br>全球科技合作机制发展进程</h1>
+        <p class="subtitle" style="font-size: 32px;">Development Process of the Global Technical and Scientific Cooperation Mechanism under CBD</p>
+        <hr style="border: 0; border-top: 4px solid #1B5E20; margin: 30px 0;">
+        <p style="font-size: 28px;"><strong>汇报人：刘燕 | 日期：2025/12/6</strong></p>
+    </div>
+</div>
+
+<!-- Slide 2: Agenda -->
+<div class="slide-container" id="slide2">
+    <h2 class="slide-title">汇报目录 / Content</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-hourglass-start"></i></div>
+                <h3>成立背景</h3>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-earth-asia"></i></div>
+                <h3>全球视野</h3>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-cogs"></i></div>
+                <h3>核心职能</h3>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-sitemap"></i></div>
+                <h3>组织架构</h3>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-binoculars"></i></div>
+                <h3>未来展望</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 3: Background Context (ADDED PAGE 4 INFO) -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">缘起：发展中国家的迫切需求</h2>
+    <div class="content-area">
+        <div class="single-box">
+            <h3><i class="fa-solid fa-quote-left" style="color:#0277BD; margin-right:15px;"></i>为何需要新机制？</h3>
+            <p style="margin-top: 20px;">
+                源于<strong>发展中国家缔约方</strong>对于技术的迫切需求。
+            </p>
+            <ul style="margin-top: 20px; padding-left: 40px;">
+                <li>许多发展中国家拥有丰富的生物资源，但在<strong>技术和能力建设</strong>方面存在短板。</li>
+                <li>难以有效应对生物多样性丧失等全球性问题。</li>
+                <li>旨在弥补现有全球机制在<strong>区域适配性</strong>上的不足。</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Background Timeline -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">发展脉络：演进之路</h2>
+    <div class="content-area">
+        <div class="timeline-layout">
+            <div class="timeline-line"></div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>公约第18条</h3>
+                    <p>确立科技合作义务，关注能力建设。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>COP 7-9</h3>
+                    <p>发布技术转移指导，成立专家组。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>COP 10-14</h3>
+                    <p>移除障碍，推动数据开放共享。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3 style="color:#1B5E20;">COP 15/8</h3>
+                    <p>确立区域中心网络架构。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3 style="color:#1B5E20;">COP 16/3</h3>
+                    <p>全球协调实体设在秘书处。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Selection Process -->
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">严格的遴选流程</h2>
+    <div class="content-area">
+        <div class="bullet-list" style="width: 100%;">
+            <ul>
+                <li>
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                    <strong>2023.7-9 意愿征集</strong><br>
+                    秘书处发布通知，各组织在线填写表格申请。
+                </li>
+                <li>
+                    <i class="fa-solid fa-filter"></i>
+                    <strong>2023.10 初筛长名单</strong><br>
+                    秘书处初筛，咨询小组提供第二阶段筛选建议。
+                </li>
+                <li>
+                    <i class="fa-solid fa-clipboard-check"></i>
+                    <strong>2024.1-3 核心短名单</strong><br>
+                    深入评估，为每个次区域准备最多3家候选机构。
+                </li>
+                <li>
+                    <i class="fa-solid fa-gavel"></i>
+                    <strong>2024.7-10 最终选定</strong><br>
+                    COP16主席团根据咨询小组报告选定最终组织。
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 6: Global Network Map -->
+<div class="slide-container bleed-image-layout" id="slide6">
+    <div class="content-container">
+        <h2 class="slide-title">全球网络布局</h2>
+        <div class="bleed-text-side">
+            <h3 style="color: #1B5E20; font-size: 48px;">18个区域支持中心</h3>
+            <p>覆盖亚洲、非洲、欧洲及美洲，构建全球生物多样性保护的坚实网络。</p>
+            <div style="background: #FFFDE7; padding: 20px; border-left: 6px solid #FBC02D; margin-top: 30px;">
+                <h3 style="color: #F57F17; margin-bottom: 10px;">NIES (南京)</h3>
+                <p>南京环境科学研究所作为重要节点，将在技术支持与区域协调中发挥关键作用。</p>
+            </div>
+        </div>
+    </div>
+    <div class="image-container">
+        <img class="bleed-image-side" src="http://googleusercontent.com/image_collection/image_retrieval/11234470015645256738" alt="Global network connectivity map">
+    </div>
+</div>
+
+<!-- Slide 7: Global Perspective 1 -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">全球视野：公约对标 (I)</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3 style="font-size: 40px;">UNFCCC (气候变化)</h3>
+                <p><strong>区域合作中心 (RCC)</strong></p>
+                <ul style="margin-top: 15px;">
+                    <li>核心依据：《巴黎协定》第11条</li>
+                    <li>布局：全球6个区域中心</li>
+                    <li>亚太中心：设在泰国曼谷 (IGES)</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="font-size: 40px;">UNCCD (荒漠化)</h3>
+                <p><strong>区域协调机制 (RCM)</strong></p>
+                <ul style="margin-top: 15px;">
+                    <li>核心依据：2009年缔约方大会决议</li>
+                    <li>布局：5个区域协调单位</li>
+                    <li>覆盖：非洲、亚洲、拉美、中北欧、中东和北非</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Global Perspective 2 -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">全球视野：公约对标 (II)</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>巴塞尔 & 斯德哥尔摩公约</h3>
+                <p><strong>亚太区域中心 (北京)</strong></p>
+                <p>由生态环境部与清华大学共同管理。巴塞尔中心服务24个国家，斯德哥尔摩中心服务21个国家。</p>
+            </div>
+            <div>
+                <h3>“海洋十年” & APEC</h3>
+                <p><strong>协作中心 (青岛/厦门)</strong></p>
+                <p>海洋与气候协作中心(FIO)与APEC海洋可持续发展中心(TIO)均落户中国，显示出强大的履约支持能力。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 9: Global Perspective 3 (ADDED PAGE 18 INFO) -->
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">全球视野：知识支持服务</h2>
+    <div class="content-area">
+        <div class="single-box" style="border-left-color: #0277BD;">
+            <h3 style="font-size: 38px;">全球生物多样性知识支持服务机构 (GKSSB)</h3>
+            <p style="margin-top: 20px;"><strong>核心依据：</strong>履约附属机构第三次会议建议，响应“后2020全球生物多样性框架”实施需求。</p>
+            <hr>
+            <p><strong>区域布局与职能：</strong></p>
+            <ul>
+                <li>面向公约所有缔约方。</li>
+                <li>由<strong>UNEP-WCMC</strong> (世界保护监测中心) 协调。</li>
+                <li>合作伙伴：欧盟JRC、公约秘书处、UNDP、联合国统计司。</li>
+                <li>助力缔约方实施、监测、报告全球框架进度。</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 10: Core Functions Architecture -->
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">核心职能：三大支柱</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-flask"></i></div>
+                <h3>科技合作</h3>
+                <p>促进联合研发</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-hand-holding-hand"></i></div>
+                <h3>技术转让</h3>
+                <p>关键技术转移</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-users-gear"></i></div>
+                <h3>能力建设</h3>
+                <p>人员与机构提升</p>
+            </div>
+        </div>
+        <p style="margin-top: 30px; text-align: center; font-weight: bold;">
+            目标：支撑“昆明——蒙特利尔全球生物多样性框架”实施
+        </p>
+    </div>
+</div>
+
+<!-- Slide 11: Regional Center Mandates (ADDED PAGE 21 INFO) -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">区域中心：五大具体授权</h2>
+    <div class="content-area">
+        <div class="numbered-list" style="width: 100%;">
+            <div class="numbered-list-item">
+                <strong>供需匹配</strong><br>搭建技术援助方与需求方的桥梁 (含联合研发)。
+            </div>
+            <div class="numbered-list-item">
+                <strong>协同增效</strong><br>与其他技术转移机制联动，履行相关科技创新工作。
+            </div>
+            <div class="numbered-list-item">
+                <strong>资源动员</strong><br>催化项目研发、实施及监测评估，推广本土解决方案。
+            </div>
+            <div class="numbered-list-item">
+                <strong>一站式服务</strong><br>提供技术知识与资源获取渠道，分享创新机会。
+            </div>
+            <div class="numbered-list-item" style="grid-column: span 2;">
+                <strong>能力提升</strong><br>促进区域及国家机构的知识共享、经验总结及良好实践传播。
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Organization Structure -->
+<div class="slide-container bleed-image-layout" id="slide12">
+    <div class="content-container">
+        <h2 class="slide-title">组织架构</h2>
+        <div class="bleed-text-side">
+            <h3 style="color: #0277BD;">全球协调实体 (GCE)</h3>
+            <p>由公约秘书处指派人员担任，负责战略指导与资源协调。</p>
+            <hr>
+            <h3 style="color: #1B5E20;">指导委员会</h3>
+            <p>每年定期会议，主席任期两年制。</p>
+            <hr>
+            <h3 style="color: #FBC02D;">区域/次区域中心</h3>
+            <p>服务对象包括：缔约方代表、地方社区代表、妇女青年代表。</p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img class="bleed-image-side" src="http://googleusercontent.com/image_collection/image_retrieval/2237595786508570274" alt="Organization structure context">
+    </div>
+</div>
+
+<!-- Slide 13: Outlook -->
+<div class="slide-container" id="slide13">
+    <h2 class="slide-title">展望：“四个一”战略</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3><i class="fa-solid fa-award"></i> 一个品牌</h3>
+                <p>打造 <strong>"Nanjing TSC"</strong> 权威、专业、可靠的国际形象。</p>
+                <hr>
+                <h3><i class="fa-solid fa-network-wired"></i> 一个网络</h3>
+                <p>构建“国际+国内”双轮驱动的活跃伙伴关系共同体。</p>
+            </div>
+            <div>
+                <h3><i class="fa-solid fa-laptop-code"></i> 一个平台</h3>
+                <p>建成亚太区域生物多样性领域的“一站式”数字化知识服务中心。</p>
+                <hr>
+                <h3><i class="fa-solid fa-book-open"></i> 一套课程</h3>
+                <p>开发模块化、标准化的能力建设课程体系。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 14: Expected Outcomes -->
+<div class="slide-container" id="slide14">
+    <h2 class="slide-title">具体成效预期</h2>
+    <div class="content-area">
+        <div class="highlight-numbers-layout">
+            <div>
+                <div class="number">1</div>
+                <div class="number-label">专家网络</div>
+                <p>建立完善区域培训体系</p>
+            </div>
+            <div>
+                <div class="number">2</div>
+                <div class="number-label">知识平台</div>
+                <p>建成多语种数据库</p>
+            </div>
+            <div>
+                <div class="number">3</div>
+                <div class="number-label">履约支撑</div>
+                <p>参与国际谈判支持</p>
+            </div>
+            <div>
+                <div class="number">4</div>
+                <div class="number-label">品牌活动</div>
+                <p>形成国际影响力</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 15: Closing -->
+<div class="slide-container full-bg-image" id="slide15" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/8784743494984659414');">
+    <div class="content-overlay" style="background: rgba(255, 255, 255, 0.95); text-align: center; border-left: none; border-bottom: 8px solid #1B5E20; margin: 0 auto;">
+        <h2 style="font-size: 72px; margin-bottom: 30px;">感谢您的聆听</h2>
+        <p style="font-size: 36px;">Thank You</p>
+        <p style="margin-top: 40px; font-style: italic; font-size: 30px;">让我们共同为2050年“人与自然和谐共生”的愿景努力</p>
+    </div>
+</div>
+
+</body>
+</html>
+```
