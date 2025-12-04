@@ -518,7 +518,7 @@ body {
         </div>
     </div>
     <div class="image-container">
-        <img class="bleed-image-side" src="http://googleusercontent.com/image_collection/image_retrieval/11234470015645256738" alt="Global network connectivity map">
+        <img class="bleed-image-side" src="images/18.png" alt="Global network connectivity map">
     </div>
 </div>
 
@@ -654,7 +654,7 @@ body {
         </div>
     </div>
     <div class="image-container">
-        <img class="bleed-image-side" src="http://googleusercontent.com/image_collection/image_retrieval/2237595786508570274" alt="Organization structure context">
+        <img class="bleed-image-side" src="images/19.png" alt="Organization structure context">
     </div>
 </div>
 
